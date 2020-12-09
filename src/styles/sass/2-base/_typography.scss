@@ -1,0 +1,72 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700;800&display=swap');
+
+body{
+    font-family: 'Open Sans', sans-serif;
+}
+
+//------------------------------------------
+//                Headings                 |
+//------------------------------------------
+
+h1,
+.section-heading{
+    font-size: $section-heading;
+}
+
+.showcase-heading{
+    font-size: $showcase-heading;
+    font-weight: bold;
+}
+
+h2,
+.heading{
+    font-size: $heading;
+}
+
+h3,
+.heading-sm{
+    font-size: $heading-sm;
+}
+
+//------------------------------------------
+//                Sub-Headings             |
+//------------------------------------------
+
+.sub-heading{
+    font-size: $sub-heading;
+    color: $grey;
+}
+
+
+//------------------------------------------
+//                Content                  |
+//------------------------------------------
+
+
+p,
+.content{
+    font-size: $content;
+}
+
+label,
+span,
+.content-sm{
+    font-size: $content-sm;
+}
+
+
+//------------------------------------------
+//                font-weight              |
+//------------------------------------------
+
+.bold{
+    font-weight: 700;
+}
+
+.semi-bold{
+    font-weight: 600;
+}
+
+.regular{
+    font-weight: 400;
+}

@@ -1,0 +1,17 @@
+.primary{
+    @include btn-props($blue, 'light');
+}
+
+.btn-blue{
+    @include btn-props($dr-blue, 'light');
+}
+
+.btn-green{
+    @include btn-props($green, 'light');
+}
+
+.loading{
+    cursor: not-allowed;
+    filter: brightness(80%);
+    text-align: center;
+}

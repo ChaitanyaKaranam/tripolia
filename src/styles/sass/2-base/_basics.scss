@@ -1,0 +1,32 @@
+html{
+    font-size: 16px;
+    @media (max-width: 1500px) {
+        font-size: 15px;
+    }
+    @media (max-width: 1200px) {
+        font-size: 14px;
+    }
+    scroll-behavior: smooth;
+}
+
+input[type="text"],
+select{
+    @include input-props;
+    height: 45px;
+}
+
+button{
+    font-family: 'Open Sans', sans-serif;
+    font-size: $content-sm;
+    padding: 0.5rem;
+    min-width: 12rem;
+    height: 2.5rem;
+    border-radius: 4px;
+    color: black;
+    @include shadow;
+    @include btn-props($lt-grey, 'dark');
+    &:disabled{
+        cursor: not-allowed;
+        filter: brightness(80%);
+    }
+}
