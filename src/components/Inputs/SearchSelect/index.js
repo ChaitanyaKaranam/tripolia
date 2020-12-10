@@ -1,19 +1,18 @@
 import { useEffect, useRef, useState } from "react"
-import { getSuggestions } from "../../helpers/utils";
-import { useOnClickOutside } from "../../hooks";
+import { getSuggestions } from "../../../helpers/utils";
+import { useOnClickOutside } from "../../../hooks";
 
-export default function SearchSelect({ name, label, isRequired, suggestions }) {
+export default function SearchSelect({ name, label, isRequired, suggestions, defaultvalue }) {
 
     let [showSuggestions, setShowSuggestions] = useState(false);
-    let [query, setQuery] = useState('');
+    let [query, setQuery] = useState(defaultvalue ? defaultvalue : '');
     let [suggestionsList, setSuggestionsList] = useState(null);
-    let [isSelected, setIsSelected] = useState(false);
+    let [isSelected, setIsSelected] = useState(defaultvalue ? true : false);
     
     const ref = useRef();
 
-    useOnClickOutside(ref, handleOnBlur)
+    useOnClickOutside(ref, handleOnBlur)  
    
-    
     useEffect(() => {
         // Remove suggestion if input is empty
         if (query === '') {
@@ -63,7 +62,9 @@ export default function SearchSelect({ name, label, isRequired, suggestions }) {
             if (suggestionsList.length === 1) {
                 setQuery(suggestionsList[0]);
             }else{
-                setQuery('')
+                if(!isSelected){
+                    setQuery('')
+                }
             }
             setShowSuggestions(false);
         }

@@ -1,0 +1,8 @@
+.flights{
+    height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    .form-fields{
+        display: grid;
+    }
+}
