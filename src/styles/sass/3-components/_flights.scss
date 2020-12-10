@@ -1,0 +1,19 @@
+.flightcard{
+    display: grid;
+    grid-auto-flow: column;
+    padding: 2rem;
+    @include shadow;
+    div{
+        min-width: 10rem;
+        display: grid;
+        row-gap: 0.5rem;
+        align-items: center;
+    }
+    .price{
+        font-weight: bolder;
+        font-size: 1.8rem;
+        &::before{
+            content: '₹';
+        }
+    }
+}

@@ -20,6 +20,17 @@ export function buildQueryString(form) {
     return parameters.substring(0, parameters.length - 1);
 }
 
+export function buildFormData(form) {
+    const formData = new FormData(form);
+    let obj = {}
+    for(const i of formData){
+        if(i[0] && i[1]) {
+            obj[i[0]] = i[1]
+        }
+    }
+    return obj;
+}
+
 export function parseQueryString(search) {
     const qs = new URLSearchParams(search);
     let obj = {}
@@ -29,4 +40,22 @@ export function parseQueryString(search) {
         }
     }
     return obj;
+}
+
+export function timeConversion(millisec) {
+
+    var seconds = (millisec / 1000).toFixed(1);
+    var minutes = (millisec / (1000 * 60)).toFixed(1);
+    var hours = (millisec / (1000 * 60 * 60)).toFixed(1);
+    var days = (millisec / (1000 * 60 * 60 * 24)).toFixed(1);
+
+    if (seconds < 60) {
+        return seconds + " s";
+    } else if (minutes < 60) {
+        return minutes + " m";
+    } else if (hours < 24) {
+        return hours + " h";
+    } else {
+        return days + " days"
+    }
 }

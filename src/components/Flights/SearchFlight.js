@@ -37,14 +37,14 @@ export default function SearchFlight({ handleOnSubmit, roundtrip, formdata }) {
                     name="departure"
                     label="Departure"
                     isRequired={true}
-                    allowpastdates={false}
+                    allowpastdates={true}
                     defaultvalue={formdata && formdata['departure']}
                 />
                 {roundtrip && <DateSelect
                     name="arrival"
                     label="Arrival"
                     isRequired={true}
-                    allowpastdates={false}
+                    allowpastdates={true}
                     defaultvalue={formdata && formdata['arrival']}
                 />}
             </div>

@@ -1,8 +1,24 @@
 .flights{
     height: 100vh;
     display: grid;
-    grid-template-columns: 1fr 2fr;
+    grid-template-columns: 1fr 3fr;
     .form-fields{
         display: grid;
+    }
+}
+
+.flights_search{
+    border-right: 1px solid $lt-grey;
+}
+
+.flights_list{
+    margin-left: 5rem;
+    margin-right: 5rem;
+    display: grid;
+    grid-template-rows: auto 1fr;
+    row-gap: 2rem;
+    ul{
+        padding: 0rem;
+        margin: 0rem;
     }
 }
