@@ -1,11 +1,10 @@
+import Home from './pages/Home';
 import './styles/sass/main.scss';
 
 function App() {
   return (
     <div className="App">
-     <h1 className="showcase-heading">Tripolia</h1>
-     <input type="text"/>
-     <button className="primary">Test</button>
+     <Home/>
     </div>
   );
 }

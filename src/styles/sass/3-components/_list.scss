@@ -1,0 +1,18 @@
+.search-menu {
+    position: absolute;
+    top: 75px;
+    background-color: $black;
+    color: white;
+    width: 15rem;
+    @include shadow;
+    margin: 0rem;
+    padding: 0rem;
+    list-style-type: none;
+    li{
+        padding: 1rem;
+        cursor: pointer;
+        &:hover{
+            background-color: $lt-black;
+        }
+    }
+}

@@ -10,6 +10,8 @@ html{
 }
 
 input[type="text"],
+input[type="search"],
+input[type="date"],
 select{
     @include input-props;
     height: 45px;
