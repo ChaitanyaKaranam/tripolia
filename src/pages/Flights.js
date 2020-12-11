@@ -35,6 +35,7 @@ export default function Flights({ location }) {
             }
             checkRoundTrip(formdata);
         }
+        // eslint-disable-next-line
     }, [formdata, flightData])
 
     // Set new formdata
@@ -154,10 +155,12 @@ function FlightsList({ flights }) {
 
     function renderFlights() {
         if (flights && Array.isArray(flights) && flights.length > 0) {
-            return flights.map((flight, index) => {
+            return flights.map((flight) => {
                 if (Array.isArray(flight)) {
                     if (flight.length > 0) {
                         return <ConnectingFlights key={"connectingflights"} connectingFlights={flight} />
+                    }else{
+                        return null;
                     }
                 } else {
                     return <FlightCard key={flight.flightNo} {...flight} />
