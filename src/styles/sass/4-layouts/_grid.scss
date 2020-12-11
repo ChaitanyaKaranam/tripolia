@@ -8,3 +8,17 @@
         padding: 2rem;
     }
 }
+
+@media (max-width: 1300px) {
+    .flights_list-grid{
+        grid-template-columns: 1fr;
+        width: initial;
+        row-gap: 3rem;
+    }
+}
+
+@media (max-width: 1200px) {
+    .flights_list-content{
+        padding: 0rem;
+    }
+}

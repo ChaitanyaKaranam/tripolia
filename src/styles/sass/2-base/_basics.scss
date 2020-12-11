@@ -1,10 +1,10 @@
 html{
     font-size: 16px;
     @media (max-width: 1500px) {
-        font-size: 15px;
+        font-size: 14px;
     }
     @media (max-width: 1200px) {
-        font-size: 14px;
+        font-size: 13px;
     }
     scroll-behavior: smooth;
 }
@@ -30,5 +30,11 @@ button{
     &:disabled{
         cursor: not-allowed;
         filter: brightness(80%);
+    }
+}
+
+@media (max-width: 1200px){
+    button{
+        min-width: initial;
     }
 }
