@@ -42,12 +42,27 @@ export function parseQueryString(search) {
     return obj;
 }
 
-export function timeConversion(millisec) {
+export function timeConversion(millisec, type) {
 
     var seconds = (millisec / 1000).toFixed(1);
     var minutes = (millisec / (1000 * 60)).toFixed(1);
     var hours = (millisec / (1000 * 60 * 60)).toFixed(1);
     var days = (millisec / (1000 * 60 * 60 * 24)).toFixed(1);
+
+    if(type){
+        switch(type){
+            case 'seconds':
+                return seconds;
+            case 'minutes':
+                return minutes;
+            case 'hours':
+                return hours;
+            case 'days':
+                return days;
+            default:
+                return seconds;
+        }
+    }
 
     if (seconds < 60) {
         return seconds + " s";

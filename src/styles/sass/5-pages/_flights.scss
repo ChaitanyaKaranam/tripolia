@@ -13,12 +13,21 @@
 
 .flights_list{
     margin-left: 5rem;
-    margin-right: 5rem;
     display: grid;
-    grid-template-rows: auto 1fr;
+    grid-template-rows: auto auto 1fr;
     row-gap: 2rem;
     ul{
         padding: 0rem;
         margin: 0rem;
     }
+    ul > div{
+        margin-bottom: 1rem;
+    }
+    overflow-y: scroll;
+}
+
+.flights_list-content{
+    display: grid;
+    grid-template-rows: auto 1fr;
+    row-gap: 1rem;
 }

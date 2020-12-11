@@ -16,4 +16,17 @@
             content: '₹';
         }
     }
+    background-color: white;
+    &:hover{
+        background-color: rgb(246, 246, 246);
+    }
+}
+
+.connectingflight{
+    @include shadow;
+    margin-bottom: 1rem;
+}
+
+.multiple{
+    background-color: $lt-grey;
 }

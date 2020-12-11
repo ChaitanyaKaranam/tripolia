@@ -1,7 +1,9 @@
 import { useEffect, useState } from "react";
+import ConnectingFlights from "../components/Flights/ConnectingFlights";
 import FlightCard from "../components/Flights/FlightCard";
 import SearchFlight from "../components/Flights/SearchFlight";
 import { FLIGHT_DATA } from "../config/flightData";
+import { filterFlightResults, getFlightMetadata } from "../helpers/flights";
 import { buildFormData, parseQueryString } from "../helpers/utils"
 
 export default function Flights({ location }) {
@@ -9,6 +11,7 @@ export default function Flights({ location }) {
     let [flightData, setFlightData] = useState([]);
     let [formdata, setFormdata] = useState(parseQueryString(location.search) || {});
     let [filteredFlightData, setFilteredFlightData] = useState([]);
+    let [filteredArrivalFlightData, setFilteredArrivalflightData] = useState([]);
     let [isRoundTrip, setIsRoundTrip] = useState(false);
 
     useEffect(() => {
@@ -20,12 +23,17 @@ export default function Flights({ location }) {
 
     useEffect(() => {
         if (formdata) {
-            const { from, to, departure } = formdata;
+            const { from, to, departure, arrival } = formdata;
             setFilteredFlightData(filterFlightResults({ from, to, departure }, flightData));
+            if (isRoundTrip) {
+                console.log(to, from, arrival);
+                setFilteredArrivalflightData(filterFlightResults({ from: to, to: from, departure: arrival }, flightData));
+            }
             checkRoundTrip(formdata);
         }
-    }, [formdata, flightData])
+    }, [formdata, flightData, isRoundTrip])
 
+    // Set new formdata
     function onSubmit(formdata) {
         setFormdata(formdata);
         checkRoundTrip(formdata);
@@ -38,33 +46,6 @@ export default function Flights({ location }) {
         }
     }
 
-    // Filter flight results
-    function filterFlightResults(filters, flights) {
-        const { from, to, departure, arrival } = filters;
-        function filterFlights(flights) {
-            // Filter flights by date
-            function filterByDate(flights) {
-                return flights
-                    .filter(flight =>
-                        flight && flight.origin && flight.destination && flight.date &&
-                        flight.origin.toLowerCase().includes(from.toLowerCase()) &&
-                        flight.destination.toLowerCase().includes(to.toLowerCase()) &&
-                        new Date(flight.date).toDateString() === new Date(departure).toDateString()
-                    )
-            }
-
-            // Fitler flights by time
-            function sortByTime(flights) {
-                return flights.sort((a, b) => Date.parse(`01/01/2020 ${a.departureTime}`) - Date.parse(`01/01/2020 ${b.departureTime}`))
-            }
-
-            let filteredData = filterByDate(flights);
-            filterByDate = sortByTime(flights);
-            return filteredData
-        }
-        return filterFlights(flights);
-    }
-
     return (
         <div className="container flights">
             <div className="flights_search">
@@ -74,11 +55,30 @@ export default function Flights({ location }) {
                 />
             </div>
             <div className="flights_list">
-                <h2>Flights List</h2>
-                <FlightsList
-                    flights={filteredFlightData}
-                    isRoundTrip={isRoundTrip}
-                />
+                <h1>Flights List</h1>
+                <div className={isRoundTrip ? 'flights_list-grid' : ''}>
+                    <div className="flights_list-content">
+                        <FlightMetadata
+                            flights={filteredFlightData}
+                            formdata={formdata}
+                        />
+                        <FlightsList
+                            flights={filteredFlightData}
+                        />
+                    </div>
+                    {isRoundTrip &&
+                        <div className="flights_list-content">
+                            <FlightMetadata
+                                flights={filteredArrivalFlightData}
+                                formdata={formdata}
+                                isRoundTrip={isRoundTrip}
+                            />
+                            <FlightsList
+                                flights={filteredArrivalFlightData}
+                            />
+                        </div>
+                    }
+                </div>
             </div>
         </div>
     )
@@ -105,12 +105,35 @@ function Search({ formdata, onSubmit }) {
     )
 }
 
-function FlightsList({ flights, isRoundTrip }) {
+function FlightMetadata({ flights, formdata, isRoundTrip }) {
+
+    const { flightcount, date, from, to } = getFlightMetadata(flights, formdata);
+
+    return (
+        <div>
+            { !isRoundTrip ? <h2>{from} to {to}</h2> : <h2>{to} to {from}</h2>}
+            
+            <div>
+                <span>{flightcount} flights found</span> &nbsp;&nbsp;
+                <span>{date}</span>
+            </div>
+        </div>
+
+    )
+}
+
+function FlightsList({ flights }) {
 
     function renderFlights() {
         if (flights && Array.isArray(flights) && flights.length > 0) {
-            return flights.map(flight => {
-                return <FlightCard key={flight.flightNo} {...flight}/>
+            return flights.map((flight, index) => {
+                if (Array.isArray(flight)) {
+                    if (flight.length > 0) {
+                        return <ConnectingFlights key={"connectingflights"} connectingFlights={flight} />
+                    }
+                } else {
+                    return <FlightCard key={flight.flightNo} {...flight} />
+                }
             })
         }
     }

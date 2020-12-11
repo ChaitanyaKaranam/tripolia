@@ -1,0 +1,10 @@
+.flights_list-grid{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 3rem;
+    width: 150rem;
+    .flights_list-content{
+        border: 1px solid $lt-grey;
+        padding: 2rem;
+    }
+}
