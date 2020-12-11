@@ -1,8 +1,8 @@
 import { useState } from "react"
 
-export default function Tabs({ tabs, onChange }){
+export default function Tabs({ tabs, onChange, defaultTab }){
 
-    let [activeTab, setActiveTab] = useState(tabs && tabs[0] ? tabs[0] : null)
+    let [activeTab, setActiveTab] = useState(defaultTab)
 
     function onTabClick(tab){
         onChange(tab);

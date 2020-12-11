@@ -122,6 +122,7 @@ function Search({ formdata, onSubmit, onRoundTripChange }) {
             <Tabs
                 tabs={['One-way', 'Round-trip']}
                 onChange={onTabChange}
+                defaultTab={ !isRoundTrip ? 'One-way' : 'Round-trip'}
             />
             <SearchFlight
                 handleOnSubmit={handleOnSubmit}
