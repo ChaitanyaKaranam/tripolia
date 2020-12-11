@@ -49,6 +49,8 @@ function ConnectingFlightCard({ flights }) {
                 </div>
             </div>
             {showAllFlights && <div className="container multiple">
+                <h4>Layover time: <label>{ timeConversion(Date.parse(`01/01/2020 ${flights[1]['departureTime']}`) - Date.parse(`01/01/2020 ${flights[0]['arrivalTime']}`)) }</label></h4>
+                <br/>
                 {flights.map((flight) => {
                     return <FlightCard key={flight.flightNo} {...flight} hidebooking={true} mode={'connecting'} hideprice={true} />
                 })}
