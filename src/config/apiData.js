@@ -1,0 +1,1 @@
+export const FLIGHT_DATA_API = 'https://tw-frontenders.firebaseio.com/advFlightSearch.json';

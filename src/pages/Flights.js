@@ -3,7 +3,8 @@ import ConnectingFlights from "../components/Flights/ConnectingFlights";
 import FlightCard from "../components/Flights/FlightCard";
 import SearchFlight from "../components/Flights/SearchFlight";
 import Tabs from "../components/Tabs";
-import { FLIGHT_DATA } from "../config/flightData";
+import { FLIGHT_DATA_API } from "../config/apiData";
+//import { TEST_FLIGHT_DATA } from "../config/flightData";
 import { filterFlightResults, getFlightMetadata } from "../helpers/flights";
 import { buildFormData, parseQueryString } from "../helpers/utils"
 
@@ -17,7 +18,10 @@ export default function Flights({ location }) {
 
     useEffect(() => {
         function getFlightData() {
-            setFlightData(FLIGHT_DATA)
+            //setFlightData(TEST_FLIGHT_DATA)
+            fetch(FLIGHT_DATA_API)
+                .then(res => res.json())
+                .then(res => setFlightData(res))
         }
         getFlightData();
     }, [])
@@ -27,7 +31,6 @@ export default function Flights({ location }) {
             const { from, to, departure, arrival } = formdata;
             setFilteredFlightData(filterFlightResults({ from, to, departure }, flightData));
             if (isRoundTrip) {
-                console.log(to, from, arrival);
                 setFilteredArrivalflightData(filterFlightResults({ from: to, to: from, departure: arrival }, flightData));
             }
             checkRoundTrip(formdata);
@@ -63,7 +66,6 @@ export default function Flights({ location }) {
                 />
             </div>
             <div className="flights_list">
-                <h1>Flights List</h1>
                 <div className={isRoundTrip ? 'flights_list-grid' : ''}>
                     <div className="flights_list-content">
                         <FlightMetadata

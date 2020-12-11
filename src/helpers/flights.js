@@ -3,9 +3,6 @@ import { timeConversion } from "./utils";
 // Filter flight results
 export function filterFlightResults(filters, flights) {
 
-    console.log(filters);
-    console.log(flights);
-
     let filtereddata;
 
     // Filter by date
@@ -113,8 +110,6 @@ export function getFlightMetadata(flights, formdata) {
             flightcount += 1;
         }
     })
-
-    console.log(formdata);
 
     date = new Date(date).toLocaleDateString("en-us", { weekday: 'long', year: 'numeric', month: 'short', day: 'numeric'});
 
