@@ -3,7 +3,7 @@ import { LOCATIONS } from "../../config/locations";
 import DateSelect from "../Inputs/DateSelect";
 import SearchSelect from "../Inputs/SearchSelect";
 
-export default function SearchFlight({ handleOnSubmit, roundtrip, formdata }) {
+export default function SearchFlight({ handleOnSubmit, roundtrip, formdata, isRoundTripRequired }) {
 
     let [suggestions, setSuggestions] = useState([]);
 
@@ -43,7 +43,7 @@ export default function SearchFlight({ handleOnSubmit, roundtrip, formdata }) {
                 {roundtrip && <DateSelect
                     name="arrival"
                     label="Arrival"
-                    isRequired={true}
+                    isRequired={isRoundTripRequired !== undefined ? isRoundTripRequired : true }
                     allowpastdates={true}
                     defaultvalue={formdata && formdata['arrival']}
                 />}

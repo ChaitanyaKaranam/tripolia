@@ -1,0 +1,17 @@
+.tabs{
+    display: grid;
+    grid-template-columns: auto auto;
+    border: 1px solid $lt-grey;
+    span{
+        cursor: pointer;
+        padding: 1rem;
+        text-align: center;
+        @include shadow;
+        font-size: $heading-sm;
+        font-weight: bolder;
+    }
+    .active{
+        background-color: $black;
+        color: white;
+    }
+}

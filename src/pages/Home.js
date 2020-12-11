@@ -18,6 +18,7 @@ function Home({ history }) {
                 <SearchFlight 
                     handleOnSubmit={handleOnSubmit}
                     roundtrip={true}
+                    isRoundTripRequired={false}
                 />
             </main>
         </div>

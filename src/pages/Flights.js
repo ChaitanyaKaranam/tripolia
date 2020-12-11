@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import ConnectingFlights from "../components/Flights/ConnectingFlights";
 import FlightCard from "../components/Flights/FlightCard";
 import SearchFlight from "../components/Flights/SearchFlight";
+import Tabs from "../components/Tabs";
 import { FLIGHT_DATA } from "../config/flightData";
 import { filterFlightResults, getFlightMetadata } from "../helpers/flights";
 import { buildFormData, parseQueryString } from "../helpers/utils"
@@ -31,7 +32,7 @@ export default function Flights({ location }) {
             }
             checkRoundTrip(formdata);
         }
-    }, [formdata, flightData, isRoundTrip])
+    }, [formdata, flightData])
 
     // Set new formdata
     function onSubmit(formdata) {
@@ -46,12 +47,19 @@ export default function Flights({ location }) {
         }
     }
 
+    function onRoundTripChange(isRoundTrip){
+        if(formdata['arrival']){
+            setIsRoundTrip(isRoundTrip);
+        }
+    }
+
     return (
         <div className="container flights">
             <div className="flights_search">
                 <Search
                     formdata={formdata}
                     onSubmit={onSubmit}
+                    onRoundTripChange={onRoundTripChange}
                 />
             </div>
             <div className="flights_list">
@@ -84,7 +92,7 @@ export default function Flights({ location }) {
     )
 }
 
-function Search({ formdata, onSubmit }) {
+function Search({ formdata, onSubmit, onRoundTripChange }) {
 
     let [isRoundTrip, setIsRoundTrip] = useState(formdata && formdata['arrival'] ? true : false)
 
@@ -93,9 +101,26 @@ function Search({ formdata, onSubmit }) {
         onSubmit(buildFormData(event.target))
     }
 
+    function onTabChange(tab) {
+        if(tab === 'One-way'){
+            if(isRoundTrip){
+                setIsRoundTrip(false)
+                onRoundTripChange(false)
+            }
+        }else{
+            if(!isRoundTrip){
+                setIsRoundTrip(true)
+                onRoundTripChange(true)
+            }
+        }
+    }
+
     return (
         <div>
-            <span>TAB</span>
+            <Tabs
+                tabs={['One-way', 'Round-trip']}
+                onChange={onTabChange}
+            />
             <SearchFlight
                 handleOnSubmit={handleOnSubmit}
                 formdata={formdata}

@@ -9,6 +9,11 @@
 
 .flights_search{
     border-right: 1px solid $lt-grey;
+    padding-right: 2rem;
+    form{
+        padding: 2rem;
+        border: 1px solid $lt-grey;
+    }
 }
 
 .flights_list{
