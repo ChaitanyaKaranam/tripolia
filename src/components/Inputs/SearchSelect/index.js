@@ -22,6 +22,7 @@ export default function SearchSelect({ name, label, isRequired, suggestions, def
         }
         setSuggestionsList(getSuggestions(suggestions, query));
 
+        // eslint-disable-next-line
     }, [query])
 
     function renderSuggestions() {
